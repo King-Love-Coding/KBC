@@ -504,7 +504,7 @@
     </div>
 
     <!-- Audio Elements -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop autoplay>
         <source src="music/kbc_theme.mp3" type="audio/mpeg">
     </audio>
     
@@ -746,23 +746,23 @@
 
         // Start Game
         function startGame() {
-            gameActive = true;
-            currentQuestion = 0;
-            currentPrize = 0;
-            selectedOption = null;
-            
-            // Reset lifelines
-            Object.keys(lifelines).forEach(key => {
-                lifelines[key].used = false;
-            });
-            
-            document.getElementById('welcomeScreen').style.display = 'none';
-            initializePrizeLadder();
-            
-            // Stop welcome music and start question sequence
-            bgMusic.pause();
-            showQuestion();
-        }
+    gameActive = true;
+    currentQuestion = 0;
+    currentPrize = 0;
+    selectedOption = null;
+    
+    // Reset lifelines
+    Object.keys(lifelines).forEach(key => {
+        lifelines[key].used = false;
+    });
+    
+    document.getElementById('welcomeScreen').style.display = 'none';
+    initializePrizeLadder();
+    
+    // Stop welcome music
+    bgMusic.pause();
+    showQuestion();
+}
 
         // Show Question
         function showQuestion() {
@@ -1240,10 +1240,14 @@ function useAudiencePoll() {
             }
         }
 
-        // Restart Game
         function restartGame() {
-            location.reload();
-        }
+    // Ensure music starts again when restarting
+    if (bgMusicEnabled) {
+        bgMusic.currentTime = 0;
+        bgMusic.play().catch(e => console.log("Music play error:", e));
+    }
+    location.reload();
+}
 
         // Show Modal
         function showModal(title, content, callback) {
