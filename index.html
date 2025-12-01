@@ -22,7 +22,6 @@
         .game-container {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             position: relative;
         }
 
@@ -52,7 +51,10 @@
             padding: 20px;
             background: linear-gradient(90deg, #FFD700, #FFA500, #FFD700);
             border-bottom: 3px solid #FF6B35;
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             z-index: 10;
             box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
         }
@@ -70,45 +72,79 @@
             100% { transform: scale(1.02); }
         }
 
-        /* Prize Money Ladder */
-        .prize-ladder {
-            position: fixed;
-            right: 20px;
-            top: 120px;
-            width: 250px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            padding: 15px;
-            border: 2px solid #FFD700;
-            z-index: 100;
-            max-height: 60vh;
-            overflow-y: auto;
+        /* Welcome Screen - MODIFIED to include Amitabh image */
+        .welcome-screen {
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+            max-width: 1000px;
+            width: 100%;
+            padding: 20px;
         }
 
-        .prize-item {
+        .welcome-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
-            margin: 3px 0;
-            border-radius: 20px;
-            background: linear-gradient(90deg, #2c2c54, #40407a);
-            border: 1px solid #555;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
         }
 
-        .prize-item.current {
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            color: #000;
+        .welcome-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .welcome-title {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: #FFD700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .welcome-subtitle {
+            font-size: 2rem;
+            color: #FFA500;
+        }
+
+        .amitabh-image-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .amitabh-image {
+            width: 280px;
+            height: auto;
+            border-radius: 15px;
+            border: 5px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+            animation: imageGlow 3s ease-in-out infinite alternate;
+        }
+
+        .amitabh-quote {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0 , 0.8);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            font-style: italic;
+            color:white;
             font-weight: bold;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            animation: quotePulse 4s ease-in-out infinite;
         }
 
-        .prize-item.safe-haven {
-            background: linear-gradient(90deg, #27ae60, #2ecc71);
-            border: 2px solid #00ff88;
+        @keyframes imageGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.9); }
+        }
+
+        @keyframes quotePulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
 
         /* Main Game Area */
@@ -118,47 +154,69 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 120px 20px 40px;
             position: relative;
             z-index: 10;
-            margin-right: 280px;
         }
 
-        /* Welcome Screen */
-        .welcome-screen {
-            text-align: center;
-            animation: fadeIn 1s ease-in;
-        }
-
-        .welcome-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .welcome-subtitle {
-            font-size: 1.5rem;
+        /* Rules Section */
+        .rules-section {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(30,30,60,0.9));
+            border-radius: 20px;
+            padding: 30px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            max-width: 800px;
+            width: 100%;
             margin-bottom: 30px;
-            color: #FFA500;
+        }
+
+        .rules-section h2 {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .rules-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .rules-list div {
+            margin: 12px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .rules-list div:before {
+            content: "•";
+            color: #FFD700;
+            font-size: 1.8rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
         }
 
         /* Question Container */
         .question-container {
-    max-width: 800px;
-    width: 100%;
-    background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(30,30,60,0.9));
-    border-radius: 20px;
-    padding: 30px;
-    border: 3px solid #FFD700;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-    animation: slideIn 0.8s ease-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 300px;
-    justify-content: center;
-}
+            max-width: 800px;
+            width: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(30,30,60,0.9));
+            border-radius: 20px;
+            padding: 30px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+            animation: slideIn 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 300px;
+            justify-content: center;
+        }
 
         @keyframes slideIn {
             0% { transform: translateY(50px); opacity: 0; }
@@ -319,6 +377,10 @@
             background: linear-gradient(135deg, #00b894, #00cec9);
         }
 
+        .btn.success:hover {
+            background: linear-gradient(135deg, #00cec9, #00b894);
+        }
+
         /* Modal */
         .modal {
             position: fixed;
@@ -353,45 +415,6 @@
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .prize-ladder {
-                position: relative;
-                right: auto;
-                top: auto;
-                width: 100%;
-                max-width: 300px;
-                margin: 20px auto;
-                order: -1;
-            }
-            
-            .game-content {
-                margin-right: 0;
-            }
-            
-            .game-container {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .options-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .welcome-title {
-                font-size: 2rem;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .lifelines-container {
-                flex-wrap: wrap;
-            }
         }
 
         /* Timer */
@@ -446,6 +469,114 @@
             color: white;
             font-size: 1.2rem;
         }
+
+        /* Start Button */
+        .start-btn {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border: none;
+            border-radius: 25px;
+            padding: 18px 40px;
+            font-size: 1.4rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            box-shadow: 0 4px 0 #1B5E20;
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 #1B5E20;
+        }
+
+        .start-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 #1B5E20;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .welcome-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .welcome-title {
+                font-size: 3rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .amitabh-image {
+                width: 240px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .lifelines-container {
+                flex-wrap: wrap;
+            }
+            
+            .amitabh-image {
+                width: 200px;
+            }
+            
+            .amitabh-quote {
+                font-size: 1.2rem;
+                bottom: -20px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .amitabh-image {
+                width: 160px;
+            }
+            
+            .amitabh-quote {
+                font-size: 1rem;
+                padding: 8px 12px;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -460,27 +591,33 @@
             <div class="logo">🎯 KAUN BANEGA CROREPATI 🎯</div>
         </div>
 
-        <!-- Prize Ladder -->
-        <div class="prize-ladder" id="prizeLadder">
-            <div style="text-align: center; margin-bottom: 10px; color: #FFD700; font-weight: bold;">Prize Money</div>
-        </div>
-
         <!-- Game Content -->
         <div class="game-content" id="gameContent">
-            <!-- Welcome Screen -->
+            <!-- Welcome Screen - MODIFIED to include image -->
             <div class="welcome-screen" id="welcomeScreen">
-                <div class="welcome-title">Welcome to KBC!</div>
-                <div class="welcome-subtitle">Answer 20 questions to win ₹7 Crore</div>
-                <div style="margin: 30px 0;">
-                    <div style="font-size: 1.2rem; margin-bottom: 15px;">🎯 Rules:</div>
-                    <div style="text-align: left; max-width: 500px; margin: 0 auto;">
-                        <div style="margin: 10px 0;">• Answer questions correctly to climb the prize ladder</div>
-                        <div style="margin: 10px 0;">• Use lifelines when you're unsure</div>
-                        <div style="margin: 10px 0;">• Safe havens at ₹10,000 and ₹3,20,000</div>
-                        <div style="margin: 10px 0;">• You can quit anytime and keep your winnings</div>
+                <div class="welcome-header">
+                    <div class="welcome-text">
+                        <div class="welcome-title">Welcome to KBC!</div>
+                        <div class="welcome-subtitle">Answer 20 questions to win ₹7 Crore</div>
+                    </div>
+                    
+                    <div class="amitabh-image-container">
+                        <img src="./images/ABKBC.jpg" alt="Amitabh Bachchan" class="amitabh-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjM1MCIgdmlld0JveD0iMCAwIDI4MCAzNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyODAiIGhlaWdodD0iMzUwIiByeD0iMTUiIGZpbGw9IiMyQzJDNTAiLz4KPHRleHQgeD0iMTQwIiB5PSIxNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFtaXRhYmggQmFjaGNoYW48L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNGRkE1MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktCQyBIb3N0PC90ZXh0Pgo8L3N2Zz4K'">
+                        <div class="amitabh-quote">"Lock Kiya Jaye?"</div>
                     </div>
                 </div>
-                <button class="btn success" onclick="startGame()" style="font-size: 1.2rem; padding: 15px 30px;">
+                
+                <div class="rules-section">
+                    <h2>🎯 Game Rules</h2>
+                    <div class="rules-list">
+                        <div>Answer questions correctly to climb the prize ladder</div>
+                        <div>Use lifelines when you're unsure</div>
+                        <div>Safe havens at ₹10,000 and ₹3,20,000</div>
+                        <div>You can quit anytime and keep your winnings</div>
+                    </div>
+                </div>
+                
+                <button class="start-btn" onclick="startGame()">
                     🚀 START GAME
                 </button>
             </div>
@@ -504,30 +641,29 @@
     </div>
 
     <!-- Audio Elements -->
-    <audio id="bgMusic" loop autoplay>
-        <source src="music/kbc_theme.mp3"  type="audio/mpeg">
+    <audio id="bgMusic" loop>
+        <source src="music/kbc_theme.mp3" type="audio/mpeg">
     </audio>
     
     <audio id="correctSound">
-        <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
+        <source src="music/cheering-and-clapping-crowd.mp3" type="audio/mpeg">
     </audio>
     
     <audio id="wrongSound">
-        <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mpeg">
+        <source src="music/_Kbc_Wrong_Answer_Sound_Ringtone_(by Fringster.com).mp3" type="audio/mpeg">
     </audio>
     
-    <!-- Add these with your other audio elements -->
-<audio id="fifty50Sound">
-    <source src="music/50-50.mp3" type="audio/mpeg">
-</audio>
+    <audio id="fifty50Sound">
+        <source src="music/50-50.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="phoneAFriendSound">
-    <source src="music/kbc_idea_phone_a_frd.mp3" type="audio/mpeg">
-</audio>
+    <audio id="phoneAFriendSound">
+        <source src="music/kbc_idea_phone_a_frd.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="audiencePollSound">
-    <source src="music/audience_poll (mp3cut.net).mp3" type="audio/mpeg">
-</audio>
+    <audio id="audiencePollSound">
+        <source src="music/audience_poll (mp3cut.net).mp3" type="audio/mpeg">
+    </audio>
     
     <audio id="questionMusic">
         <source src="music/kbc-question.mp3" type="audio/mpeg">
@@ -538,7 +674,7 @@
     </audio>
     
     <audio id="winSound">
-        <source src="https://www.soundjay.com/human/sounds/applause-8.mp3" type="audio/mpeg">
+        <source src="" type="audio/mpeg">
     </audio>
 
     <script>
@@ -586,84 +722,98 @@
                 correct: 1,
                 explanation: "New Delhi is the capital of India."
             },
+
             {
                 question: "How many days are there in a leap year?",
                 options: ["365", "366", "364", "367"],
                 correct: 1,
                 explanation: "A leap year has 366 days."
             },
+
             {
                 question: "Which planet is known as the Red Planet?",
                 options: ["Venus", "Jupiter", "Mars", "Saturn"],
                 correct: 2,
                 explanation: "Mars is known as the Red Planet."
             },
+
             {
                 question: "What is the largest mammal in the world?",
                 options: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
                 correct: 1,
                 explanation: "The Blue Whale is the largest mammal."
             },
+
             {
                 question: "In which year did India gain independence?",
                 options: ["1946", "1947", "1948", "1949"],
                 correct: 1,
                 explanation: "India gained independence in 1947."
             },
+
             {
                 question: "Who wrote 'Pride and Prejudice'?",
                 options: ["Charlotte Bronte", "Jane Austen", "Emily Dickinson", "Virginia Woolf"],
                 correct: 1,
                 explanation: "Jane Austen wrote Pride and Prejudice."
             },
+
             {
                 question: "What is the chemical symbol for Gold?",
                 options: ["Go", "Gd", "Au", "Ag"],
                 correct: 2,
                 explanation: "Au is the chemical symbol for Gold."
             },
+
             {
                 question: "Which city is known as the Silicon Valley of India?",
                 options: ["Hyderabad", "Pune", "Chennai", "Bangalore"],
                 correct: 3,
                 explanation: "Bangalore is known as the Silicon Valley of India."
             },
+
             {
                 question: "What is the smallest unit of matter?",
                 options: ["Molecule", "Atom", "Electron", "Proton"],
                 correct: 1,
                 explanation: "Atom is the smallest unit of matter."
             },
+
             {
                 question: "Which river is the longest in the world?",
                 options: ["Amazon", "Nile", "Ganges", "Mississippi"],
                 correct: 1,
                 explanation: "The Nile River is the longest river in the world."
             },
+
             {
                 question: "What is the speed of light in vacuum?",
                 options: ["3 × 10⁸ m/s", "3 × 10⁷ m/s", "3 × 10⁹ m/s", "3 × 10⁶ m/s"],
                 correct: 0,
                 explanation: "The speed of light in vacuum is 3 × 10⁸ m/s."
             },
+
             {
                 question: "Who formulated the theory of relativity?",
                 options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Nikola Tesla"],
                 correct: 1,
                 explanation: "Albert Einstein formulated the theory of relativity."
             },
+
             {
                 question: "What is the most abundant gas in Earth's atmosphere?",
                 options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
                 correct: 2,
                 explanation: "Nitrogen makes up about 78% of Earth's atmosphere."
             },
+
             {
                 question: "Which ancient wonder was located in Alexandria?",
                 options: ["Hanging Gardens", "Lighthouse of Alexandria", "Colossus of Rhodes", "Temple of Artemis"],
                 correct: 1,
                 explanation: "The Lighthouse of Alexandria was one of the Seven Wonders."
             },
+
             {
                 question: "What is the hardest natural substance on Earth?",
                 options: ["Graphite", "Quartz", "Diamond", "Steel"],
@@ -672,234 +822,214 @@
             },
 
             {
-            question: "Which of these elements is a liquid at room temperature?",
-            options: ["Mercury", "Bromine", "Both Mercury and Bromine", "None of these"],
-            correct: 2,
-            explanation: "Both Mercury and Bromine are liquids at room temperature."
-        },
-        {
-            question: "Which country has won the most FIFA World Cup titles?",
-            options: ["Germany", "Brazil", "Argentina", "Italy"],
-            correct: 1,
-            explanation: "Brazil has won 5 FIFA World Cup titles (as of 2023)."
-        },
-        {
-            question: "Who is the only US President to serve more than two terms?",
-            options: ["Theodore Roosevelt", "Franklin D. Roosevelt", "Abraham Lincoln", "John F. Kennedy"],
-            correct: 1,
-            explanation: "Franklin D. Roosevelt served 4 terms (1933-1945)."
-        },
-        {
-            question: "Which of these is NOT one of the Seven Wonders of the Ancient World?",
-            options: ["Colossus of Rhodes", "Hanging Gardens of Babylon", "Great Pyramid of Giza", "Leaning Tower of Pisa"],
-            correct: 3,
-            explanation: "The Leaning Tower of Pisa is not one of the ancient wonders."
-        },
-        {
-            question: "What is the largest organ in the human body?",
-            options: ["Liver", "Brain", "Skin", "Heart"],
-            correct: 2,
-            explanation: "The skin is the largest organ by surface area and weight."
-        },
-        {
-            question: "Which country has the most time zones?",
-            options: ["Russia", "USA", "France", "China"],
-            correct: 2,
-            explanation: "France has 12 time zones due to its overseas territories."
-        },
-        {
-            question: "Who painted 'The Starry Night'?",
-            options: ["Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Salvador Dalí"],
-            correct: 1,
-            explanation: "Vincent van Gogh painted 'The Starry Night' in 1889."
-        },
+                question: "Which of these elements is a liquid at room temperature?",
+                options: ["Mercury", "Bromine", "Both Mercury and Bromine", "None of these"],
+                correct: 2,
+                explanation: "Both Mercury and Bromine are liquids at room temperature."
+            },
 
-        {
-    question: "Which of these mathematical concepts is named after a Greek letter?",
-    options: ["Fibonacci Sequence", "Pascal's Triangle", "Euler's Number", "Riemann Hypothesis"],
-    correct: 2,
-    explanation: "Euler's Number is represented by the Greek letter 'e' (approximately 2.71828)."
-}
+            {
+                question: "Which country has won the most FIFA World Cup titles?",
+                options: ["Germany", "Brazil", "Argentina", "Italy"],
+                correct: 1,
+                explanation: "Brazil has won 5 FIFA World Cup titles (as of 2023)."
+            },
+
+            {
+                question: "Who is the only US President to serve more than two terms?",
+                options: ["Theodore Roosevelt", "Franklin D. Roosevelt", "Abraham Lincoln", "John F. Kennedy"],
+                correct: 1,
+                explanation: "Franklin D. Roosevelt served 4 terms (1933-1945)."
+            },
+
+            {
+                question: "Which of these is NOT one of the Seven Wonders of the Ancient World?",
+                options: ["Colossus of Rhodes", "Hanging Gardens of Babylon", "Great Pyramid of Giza", "Leaning Tower of Pisa"],
+                correct: 3,
+                explanation: "The Leaning Tower of Pisa is not one of the ancient wonders."
+            },
+
+            {
+                question: "What is the largest organ in the human body?",
+                options: ["Liver", "Brain", "Skin", "Heart"],
+                correct: 2,
+                explanation: "The skin is the largest organ by surface area and weight."
+            },
+
+            {
+                question: "Which country has the most time zones?",
+                options: ["Russia", "USA", "France", "China"],
+                correct: 2,
+                explanation: "France has 12 time zones due to its overseas territories."
+            },
+
+            {
+                question: "Who painted 'The Starry Night'?",
+                options: ["Pablo Picasso", "Vincent van Gogh", "Claude Monet", "Salvador Dalí"],
+                correct: 1,
+                explanation: "Vincent van Gogh painted 'The Starry Night' in 1889."
+            },
+            
+            {
+                question: "Which of these mathematical concepts is named after a Greek letter?",
+                options: ["Fibonacci Sequence", "Pascal's Triangle", "Euler's Number", "Riemann Hypothesis"],
+                correct: 2,
+                explanation: "Euler's Number is represented by the Greek letter 'e' (approximately 2.71828)."
+            }
 
         ];
 
-        // Initialize Prize Ladder
-        function initializePrizeLadder() {
-            const ladder = document.getElementById('prizeLadder');
-            let ladderHTML = '<div style="text-align: center; margin-bottom: 10px; color: #FFD700; font-weight: bold;">Prize Money</div>';
-            
-            for (let i = prizeMoney.length - 1; i >= 0; i--) {
-                const isCurrentQuestion = i === currentQuestion;
-                const isSafeHaven = safeHavens.includes(prizeMoney[i]);
-                const classes = `prize-item ${isCurrentQuestion ? 'current' : ''} ${isSafeHaven ? 'safe-haven' : ''}`;
-                
-                ladderHTML += `
-                    <div class="${classes}">
-                        <span>${i + 1}</span>
-                        <span>₹${prizeMoney[i].toLocaleString()}</span>
-                    </div>
-                `;
-            }
-            
-            ladder.innerHTML = ladderHTML;
-        }
-
         // Start Game
         function startGame() {
-    gameActive = true;
-    currentQuestion = 0;
-    currentPrize = 0;
-    selectedOption = null;
-    
-    // Reset lifelines
-    Object.keys(lifelines).forEach(key => {
-        lifelines[key].used = false;
-    });
-    
-    document.getElementById('welcomeScreen').style.display = 'none';
-    initializePrizeLadder();
-    
-    // Stop welcome music
-    bgMusic.pause();
-    showQuestion();
-}
+            gameActive = true;
+            currentQuestion = 0;
+            currentPrize = 0;
+            selectedOption = null;
+            
+            // Reset lifelines
+            Object.keys(lifelines).forEach(key => {
+                lifelines[key].used = false;
+            });
+            
+            document.getElementById('welcomeScreen').style.display = 'none';
+            
+            // Stop welcome music
+            stopAllAudio();
+            showQuestion();
+        }
 
         // Show Question
         function showQuestion() {
-    if (currentQuestion >= questions.length) {
-        endGame(true);
-        return;
-    }
+            if (currentQuestion >= questions.length) {
+                endGame(true);
+                return;
+            }
 
-       if (currentQuestion < 10) {
-            timeLeft = 30; // First 10 questions: 30 seconds
-        } else if (currentQuestion < 15) {
-            timeLeft = 50; // Next 5 questions: 50 seconds
-        } else {
-            timeLeft = 60; // Final questions: 60 seconds
+            if (currentQuestion < 10) {
+                timeLeft = 30; // First 10 questions: 30 seconds
+            } else if (currentQuestion < 15) {
+                timeLeft = 50; // Next 5 questions: 50 seconds
+            } else {
+                timeLeft = 60; // Final questions: 60 seconds
+            }
+
+            const question = questions[currentQuestion];
+            selectedOption = null;
+            
+            const gameContent = document.getElementById('gameContent');
+            gameContent.innerHTML = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1} - For ₹${prizeMoney[currentQuestion].toLocaleString()}</div>
+                    <div class="question-text">${question.question}</div>
+                    
+                    <div class="options-container" id="optionsContainer" style="display: none;">
+                        ${question.options.map((option, index) => `
+                            <div class="option" onclick="selectOption(${index})">
+                                <strong>${String.fromCharCode(65 + index)})</strong> ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="lifelines-container" id="lifelinesContainer" style="display: none;">
+                        ${Object.entries(lifelines).map(([key, lifeline]) => `
+                            <div class="lifeline ${lifeline.used ? 'used' : ''}" 
+                                 onclick="${lifeline.used ? '' : `useLifeline('${key}')`}"
+                                 title="${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}">
+                                ${lifeline.icon}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="controls" id="controlsContainer" style="display: none;">
+                        <button class="btn" onclick="confirmAnswer()" id="confirmBtn" style="display: none;">
+                            ✓ FINAL ANSWER
+                        </button>
+                        <button class="btn danger" onclick="quitGame()">
+                            💰 QUIT & TAKE MONEY
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            playQuestionSequence();
         }
 
-    const question = questions[currentQuestion];
-    selectedOption = null;
-    
-    const gameContent = document.getElementById('gameContent');
-    gameContent.innerHTML = `
-        <div class="question-container">
-            <div class="question-number">Question ${currentQuestion + 1} - For ₹${prizeMoney[currentQuestion].toLocaleString()}</div>
-            <div class="question-text">${question.question}</div>
-            
-            <div class="options-container" id="optionsContainer" style="display: none;">
-                ${question.options.map((option, index) => `
-                    <div class="option" onclick="selectOption(${index})">
-                        <strong>${String.fromCharCode(65 + index)})</strong> ${option}
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div class="lifelines-container" id="lifelinesContainer" style="display: none;">
-                ${Object.entries(lifelines).map(([key, lifeline]) => `
-                    <div class="lifeline ${lifeline.used ? 'used' : ''}" 
-                         onclick="${lifeline.used ? '' : `useLifeline('${key}')`}"
-                         title="${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}">
-                        ${lifeline.icon}
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div class="controls" id="controlsContainer" style="display: none;">
-                <button class="btn" onclick="confirmAnswer()" id="confirmBtn" style="display: none;">
-                    ✓ FINAL ANSWER
-                </button>
-                <button class="btn danger" onclick="quitGame()">
-                    💰 QUIT & TAKE MONEY
-                </button>
-            </div>
-        </div>
-    `;
-    
-    initializePrizeLadder();
-    playQuestionSequence();
-}
-
         // Play question music and timer sound sequence
-       function playQuestionSequence() {
-    // Stop any currently playing sounds
-    questionMusic.pause();
-    timerStartSound.pause();
-    
-    // Reset audio positions
-    questionMusic.currentTime = 0;
-    timerStartSound.currentTime = 0;
-    
-    // Play question music first
-    if (sfxEnabled) {
-        questionMusic.volume = 0.5;
-        questionMusic.play()
-            .then(() => {
-                // When question music ends, play timer sound and start timer
-                questionMusic.onended = () => {
-                    // Show options, lifelines and controls
-                    document.getElementById('optionsContainer').style.display = 'grid';
-                    document.getElementById('lifelinesContainer').style.display = 'flex';
-                    document.getElementById('controlsContainer').style.display = 'flex';
-                    
-                    // Start the timer (which will handle its own sound)
-                    startTimer();
-                };
-            })
-            .catch(e => {
-                console.log("Question music error:", e);
-                // If question music fails, still show options and start timer
+        function playQuestionSequence() {
+            // Stop any currently playing sounds
+            stopAllAudio();
+            
+            // Reset audio positions
+            questionMusic.currentTime = 0;
+            timerStartSound.currentTime = 0;
+            
+            // Play question music first
+            if (sfxEnabled) {
+                questionMusic.volume = 0.5;
+                questionMusic.play()
+                    .then(() => {
+                        // When question music ends, play timer sound and start timer
+                        questionMusic.onended = () => {
+                            // Show options, lifelines and controls
+                            document.getElementById('optionsContainer').style.display = 'grid';
+                            document.getElementById('lifelinesContainer').style.display = 'flex';
+                            document.getElementById('controlsContainer').style.display = 'flex';
+                            
+                            // Start the timer (which will handle its own sound)
+                            startTimer();
+                        };
+                    })
+                    .catch(e => {
+                        console.log("Question music error:", e);
+                        // If question music fails, still show options and start timer
+                        document.getElementById('optionsContainer').style.display = 'grid';
+                        document.getElementById('lifelinesContainer').style.display = 'flex';
+                        document.getElementById('controlsContainer').style.display = 'flex';
+                        startTimer();
+                    });
+            } else {
+                // If sound effects are disabled, show everything immediately
                 document.getElementById('optionsContainer').style.display = 'grid';
                 document.getElementById('lifelinesContainer').style.display = 'flex';
                 document.getElementById('controlsContainer').style.display = 'flex';
                 startTimer();
-            });
-    } else {
-        // If sound effects are disabled, show everything immediately
-        document.getElementById('optionsContainer').style.display = 'grid';
-        document.getElementById('lifelinesContainer').style.display = 'flex';
-        document.getElementById('controlsContainer').style.display = 'flex';
-        startTimer();
-    }
-}
+            }
+        }
 
         // Start Timer
-// Start Timer
-function startTimer() {
-    // Keep the current timeLeft value
-    document.getElementById('timer').style.display = 'flex';
-    updateTimer();
-    
-    // Play the timer sound if SFX are enabled
-    if (sfxEnabled) {
-        timerStartSound.currentTime = 0;
-        timerStartSound.play().catch(e => console.log("Timer sound error:", e));
-    }
-    
-    timer = setInterval(() => {
-        timeLeft--;
-        updateTimer();
-        
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            // Stop the timer sound when time's up
-            timerStartSound.pause();
-            timeUp();
+        function startTimer() {
+            // Keep the current timeLeft value
+            document.getElementById('timer').style.display = 'flex';
+            updateTimer();
+            
+            // Play the timer sound if SFX are enabled
+            if (sfxEnabled) {
+                timerStartSound.currentTime = 0;
+                timerStartSound.play().catch(e => console.log("Timer sound error:", e));
+            }
+            
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // Stop the timer sound when time's up
+                    timerStartSound.pause();
+                    timeUp();
+                }
+            }, 1000);
         }
-    }, 1000);
-}
 
         // Pause Timer
-// Pause Timer
-function pauseTimer() {
-    clearInterval(timer);
-    document.getElementById('timer').style.display = 'none';
-    // Pause the timer sound if it's playing
-    if (!timerStartSound.paused) {
-        timerStartSound.pause();
-    }
-}
+        function pauseTimer() {
+            clearInterval(timer);
+            document.getElementById('timer').style.display = 'none';
+            // Pause the timer sound if it's playing
+            if (!timerStartSound.paused) {
+                timerStartSound.pause();
+            }
+        }
 
         // Update Timer Display
         function updateTimer() {
@@ -946,8 +1076,7 @@ function pauseTimer() {
             if (selectedOption === null || !gameActive) return;
             
             // Stop any playing music
-            questionMusic.pause();
-            timerStartSound.pause();
+            stopAllAudio();
             
             clearInterval(timer);
             document.getElementById('timer').style.display = 'none';
@@ -977,10 +1106,33 @@ function pauseTimer() {
                     currentQuestion++;
                     
                     if (currentQuestion >= questions.length) {
-                        playSound('win');
-                        showModal('🎉 CONGRATULATIONS!', `You've won the jackpot of ₹${currentPrize.toLocaleString()}! You are the new CROREPATI!`, () => {
-                            endGame(true);
-                        });
+                        // Stop all audio before playing win sound
+                        stopAllAudio();
+                        
+                        // Play win sound and wait for it to finish before showing modal
+                        if (sfxEnabled) {
+                            winSound.currentTime = 0;
+                            winSound.play()
+                                .then(() => {
+                                    winSound.onended = () => {
+                                        showModal('🎉 CONGRATULATIONS!', `You've won the jackpot of ₹${currentPrize.toLocaleString()}! You are the new CROREPATI!`, () => {
+                                            endGame(true);
+                                        });
+                                    };
+                                })
+                                .catch(e => {
+                                    console.log("Win sound error:", e);
+                                    // If win sound fails, show modal immediately
+                                    showModal('🎉 CONGRATULATIONS!', `You've won the jackpot of ₹${currentPrize.toLocaleString()}! You are the new CROREPATI!`, () => {
+                                        endGame(true);
+                                    });
+                                });
+                        } else {
+                            // If SFX disabled, show modal immediately
+                            showModal('🎉 CONGRATULATIONS!', `You've won the jackpot of ₹${currentPrize.toLocaleString()}! You are the new CROREPATI!`, () => {
+                                endGame(true);
+                            });
+                        }
                     } else {
                         let message = `Correct! ${question.explanation}<br><br>You've won ₹${currentPrize.toLocaleString()}!`;
                         
@@ -1002,66 +1154,86 @@ function pauseTimer() {
         }
 
         // Use Lifeline
-// Use Lifeline
-function useLifeline(type) {
-    if (lifelines[type].used || !gameActive) return;
-    
-    lifelines[type].used = true;
-    
-    // Pause the timer
-    pauseTimer();
-    
-    // Play specific lifeline sound
-    let sound;
-    switch (type) {
-        case 'fifty50':
-            sound = fifty50Sound;
-            break;
-        case 'phoneAFriend':
-            sound = phoneAFriendSound;
-            break;
-        case 'audiencePoll':
-            sound = audiencePollSound;
-            break;
-    }
-    
-    // Disable all options while lifeline is active
-    document.querySelectorAll('.option').forEach(opt => {
-        opt.style.pointerEvents = 'none';
-    });
-    
-    // Play the sound
-    if (sfxEnabled) {
-        sound.currentTime = 0;
-        sound.volume = 0.6;
-        sound.play()
-            .then(() => {
-                sound.onended = () => {
-                    // Re-enable options after sound finishes
-                    document.querySelectorAll('.option').forEach(opt => {
-                        opt.style.pointerEvents = 'auto';
+        function useLifeline(type) {
+            if (lifelines[type].used || !gameActive) return;
+            
+            lifelines[type].used = true;
+            
+            // Pause the timer
+            pauseTimer();
+            
+            // Play specific lifeline sound
+            let sound;
+            switch (type) {
+                case 'fifty50':
+                    sound = fifty50Sound;
+                    break;
+                case 'phoneAFriend':
+                    sound = phoneAFriendSound;
+                    break;
+                case 'audiencePoll':
+                    sound = audiencePollSound;
+                    break;
+            }
+            
+            // Disable all options while lifeline is active
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Play the sound
+            if (sfxEnabled) {
+                sound.currentTime = 0;
+                sound.volume = 0.6;
+                sound.play()
+                    .then(() => {
+                        sound.onended = () => {
+                            // Re-enable options after sound finishes
+                            document.querySelectorAll('.option').forEach(opt => {
+                                opt.style.pointerEvents = 'auto';
+                            });
+                            
+                            // Apply the lifeline effect immediately
+                            switch (type) {
+                                case 'fifty50':
+                                    apply50_50();
+                                    break;
+                                case 'phoneAFriend':
+                                    usePhoneAFriend();
+                                    break;
+                                case 'audiencePoll':
+                                    useAudiencePoll();
+                                    break;
+                            }
+                            
+                            // Restart the timer immediately after lifeline ends
+                            startTimer();
+                        };
+                    })
+                    .catch(e => {
+                        console.log("Lifeline sound error:", e);
+                        // If sound fails, still apply the lifeline immediately
+                        document.querySelectorAll('.option').forEach(opt => {
+                            opt.style.pointerEvents = 'auto';
+                        });
+                        
+                        switch (type) {
+                            case 'fifty50':
+                                apply50_50();
+                                break;
+                            case 'phoneAFriend':
+                                usePhoneAFriend();
+                                break;
+                            case 'audiencePoll':
+                                useAudiencePoll();
+                                break;
+                        }
+                        
+                        // Restart the timer if sound fails
+                        startTimer();
                     });
-                    
-                    // Apply the lifeline effect immediately
-                    switch (type) {
-                        case 'fifty50':
-                            apply50_50();
-                            break;
-                        case 'phoneAFriend':
-                            usePhoneAFriend();
-                            break;
-                        case 'audiencePoll':
-                            useAudiencePoll();
-                            break;
-                    }
-                    
-                    // Restart the timer immediately after lifeline ends
-                    startTimer();
-                };
-            })
-            .catch(e => {
-                console.log("Lifeline sound error:", e);
-                // If sound fails, still apply the lifeline immediately
+            } else {
+                // If sound effects are disabled, just apply the lifeline immediately
                 document.querySelectorAll('.option').forEach(opt => {
                     opt.style.pointerEvents = 'auto';
                 });
@@ -1078,105 +1250,84 @@ function useLifeline(type) {
                         break;
                 }
                 
-                // Restart the timer if sound fails
+                // Restart the timer immediately since there's no sound to wait for
                 startTimer();
-            });
-    } else {
-        // If sound effects are disabled, just apply the lifeline immediately
-        document.querySelectorAll('.option').forEach(opt => {
-            opt.style.pointerEvents = 'auto';
-        });
-        
-        switch (type) {
-            case 'fifty50':
-                apply50_50();
-                break;
-            case 'phoneAFriend':
-                usePhoneAFriend();
-                break;
-            case 'audiencePoll':
-                useAudiencePoll();
-                break;
-        }
-        
-        // Restart the timer immediately since there's no sound to wait for
-        startTimer();
-    }
-    
-    // Update lifeline display
-    document.querySelector(`[onclick="useLifeline('${type}')"]`).classList.add('used');
-    document.querySelector(`[onclick="useLifeline('${type}')"]`).setAttribute('onclick', '');
-}
-
-// Apply 50-50 effect (without showing modal)
-function apply50_50() {
-    const question = questions[currentQuestion];
-    const correctIndex = question.correct;
-    const wrongOptions = [0, 1, 2, 3].filter(i => i !== correctIndex);
-    
-    // Remove 2 random wrong options
-    const toRemove = wrongOptions.sort(() => 0.5 - Math.random()).slice(0, 2);
-    
-    document.querySelectorAll('.option').forEach((opt, index) => {
-        if (toRemove.includes(index)) {
-            opt.classList.add('eliminated');
-            opt.onclick = null;
-        }
-    });    
-}
-
-function usePhoneAFriend() {
-    const question = questions[currentQuestion];
-    const friends = ['Rajesh', 'Priya', 'Amit', 'Sneha', 'Vikash'];
-    const friend = friends[Math.floor(Math.random() * friends.length)];
-    const confidence = Math.floor(Math.random() * 35) + 60; // 60-95%
-    
-    // 90% chance friend is right
-    const isRight = Math.random() < 0.9;
-    const friendAnswer = isRight ? question.correct : Math.floor(Math.random() * 4);
-    const answerLetter = String.fromCharCode(65 + friendAnswer);
-    
-    // Show the modal after the sound
-    showModal('📞 Phone a Friend', `${friend}: "I think the answer is <strong>${answerLetter})</strong> ${question.options[friendAnswer]}. I'm ${confidence}% confident!"`);
-}
-
-function useAudiencePoll() {
-    const question = questions[currentQuestion];
-    const correctIndex = question.correct;
-    
-    // Generate poll results
-    const results = [0, 0, 0, 0];
-    results[correctIndex] = Math.floor(Math.random() * 30) + 40; // 40-70% for correct
-    
-    let remaining = 100 - results[correctIndex];
-    for (let i = 0; i < 4; i++) {
-        if (i !== correctIndex) {
-            if (remaining > 0) {
-                const amount = i === 3 ? remaining : Math.floor(Math.random() * remaining);
-                results[i] = amount;
-                remaining -= amount;
             }
+            
+            // Update lifeline display
+            document.querySelector(`[onclick="useLifeline('${type}')"]`).classList.add('used');
+            document.querySelector(`[onclick="useLifeline('${type}')"]`).setAttribute('onclick', '');
         }
-    }
-    
-    let pollHTML = '<div style="text-align: left; max-width: 300px; margin: 20px auto;">';
-    results.forEach((percentage, index) => {
-        const letter = String.fromCharCode(65 + index);
-        pollHTML += `
-            <div style="margin: 10px 0; display: flex; align-items: center;">
-                <span style="width: 30px; font-weight: bold;">${letter}:</span>
-                <div style="background: #333; height: 20px; flex: 1; margin: 0 10px; border-radius: 10px; overflow: hidden;">
-                    <div style="background: linear-gradient(90deg, #FFD700, #FFA500); height: 100%; width: ${percentage}%; transition: width 2s ease;"></div>
-                </div>
-                <span style="width: 40px; text-align: right; font-weight: bold;">${percentage}%</span>
-            </div>
-        `;
-    });
-    pollHTML += '</div>';
-    
-    // Show the modal after the sound
-    showModal('👥 Audience Poll', 'Here are the results from our studio audience:<br>' + pollHTML);
-}
+
+        // Apply 50-50 effect (without showing modal)
+        function apply50_50() {
+            const question = questions[currentQuestion];
+            const correctIndex = question.correct;
+            const wrongOptions = [0, 1, 2, 3].filter(i => i !== correctIndex);
+            
+            // Remove 2 random wrong options
+            const toRemove = wrongOptions.sort(() => 0.5 - Math.random()).slice(0, 2);
+            
+            document.querySelectorAll('.option').forEach((opt, index) => {
+                if (toRemove.includes(index)) {
+                    opt.classList.add('eliminated');
+                    opt.onclick = null;
+                }
+            });    
+        }
+
+        function usePhoneAFriend() {
+            const question = questions[currentQuestion];
+            const friends = ['Rajesh', 'Priya', 'Amit', 'Sneha', 'Vikash'];
+            const friend = friends[Math.floor(Math.random() * friends.length)];
+            const confidence = Math.floor(Math.random() * 35) + 60; // 60-95%
+            
+            // 90% chance friend is right
+            const isRight = Math.random() < 0.9;
+            const friendAnswer = isRight ? question.correct : Math.floor(Math.random() * 4);
+            const answerLetter = String.fromCharCode(65 + friendAnswer);
+            
+            // Show the modal after the sound
+            showModal('📞 Phone a Friend', `${friend}: "I think the answer is <strong>${answerLetter})</strong> ${question.options[friendAnswer]}. I'm ${confidence}% confident!"`);
+        }
+
+        function useAudiencePoll() {
+            const question = questions[currentQuestion];
+            const correctIndex = question.correct;
+            
+            // Generate poll results
+            const results = [0, 0, 0, 0];
+            results[correctIndex] = Math.floor(Math.random() * 30) + 40; // 40-70% for correct
+            
+            let remaining = 100 - results[correctIndex];
+            for (let i = 0; i < 4; i++) {
+                if (i !== correctIndex) {
+                    if (remaining > 0) {
+                        const amount = i === 3 ? remaining : Math.floor(Math.random() * remaining);
+                        results[i] = amount;
+                        remaining -= amount;
+                    }
+                }
+            }
+            
+            let pollHTML = '<div style="text-align: left; max-width: 300px; margin: 20px auto;">';
+            results.forEach((percentage, index) => {
+                const letter = String.fromCharCode(65 + index);
+                pollHTML += `
+                    <div style="margin: 10px 0; display: flex; align-items: center;">
+                        <span style="width: 30px; font-weight: bold;">${letter}:</span>
+                        <div style="background: #333; height: 20px; flex: 1; margin: 0 10px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: linear-gradient(90deg, #FFD700, #FFA500); height: 100%; width: ${percentage}%; transition: width 2s ease;"></div>
+                        </div>
+                        <span style="width: 40px; text-align: right; font-weight: bold;">${percentage}%</span>
+                    </div>
+                `;
+            });
+            pollHTML += '</div>';
+            
+            // Show the modal after the sound
+            showModal('👥 Audience Poll', 'Here are the results from our studio audience:<br>' + pollHTML);
+        }
 
         // Quit Game
         function quitGame() {
@@ -1214,21 +1365,28 @@ function useAudiencePoll() {
             
             gameContent.innerHTML = `
                 <div class="welcome-screen">
-                    <div class="welcome-title">${isWinner ? '🎉 YOU WIN! 🎉' : '🏆 GAME OVER 🏆'}</div>
-                    <div class="welcome-subtitle">You take home ₹${prize.toLocaleString()}</div>
-                    <button class="btn success" onclick="restartGame()" style="font-size: 1.2rem; padding: 15px 30px; margin-top: 30px;">
+                    <div class="welcome-header">
+                        <div class="welcome-text">
+                            <div class="welcome-title">${isWinner ? '🎉 YOU WIN! 🎉' : '🏆 GAME OVER 🏆'}</div>
+                            <div class="welcome-subtitle">You take home ₹${prize.toLocaleString()}</div>
+                        </div>
+                        <div class="amitabh-image-container">
+                            <img src="./images/ABKBC.jpg" alt="Amitabh Bachchan" class="amitabh-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjM1MCIgdmlld0JveD0iMCAwIDI4MCAzNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyODAiIGhlaWdodD0iMzUwIiByeD0iMTUiIGZpbGw9IiMyQzJDNTAiLz4KPHRleHQgeD0iMTQwIiB5PSIxNjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkFtaXRhYmggQmFjaGNoYW48L3RleHQ+Cjx0ZXh0IHg9IjE0MCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiNGRkE1MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPktCQyBIb3N0PC90ZXh0Pgo8L3N2Zz4K'">
+                            <div class="amitabh-quote">${isWinner ? '"Badhai ho! Aap ban gaye crorepati!"' : '"Phir kabhi zaroor aana!"'}</div>
+                        </div>
+                    </div>
+                    <button class="start-btn" onclick="restartGame()" style="margin-top: 40px;">
                         🔄 PLAY AGAIN
                     </button>
                 </div>
             `;
             
             // Stop all sounds
-            bgMusic.pause();
-            questionMusic.pause();
-            timerStartSound.pause();
+            stopAllAudio();
             
             // Play win sound if winner
             if (isWinner && sfxEnabled) {
+                winSound.currentTime = 0;
                 winSound.play().catch(e => console.log("Win sound error:", e));
             }
             
@@ -1241,13 +1399,14 @@ function useAudiencePoll() {
         }
 
         function restartGame() {
-    // Ensure music starts again when restarting
-    if (bgMusicEnabled) {
-        bgMusic.currentTime = 0;
-        bgMusic.play().catch(e => console.log("Music play error:", e));
-    }
-    location.reload();
-}
+            // Ensure music starts again when restarting
+            stopAllAudio();
+            if (bgMusicEnabled) {
+                bgMusic.currentTime = 0;
+                bgMusic.play().catch(e => console.log("Music play error:", e));
+            }
+            location.reload();
+        }
 
         // Show Modal
         function showModal(title, content, callback) {
@@ -1314,6 +1473,30 @@ function useAudiencePoll() {
             sound.play().catch(e => console.log("Sound error:", e));
         }
 
+        // Stop All Audio
+        function stopAllAudio() {
+            bgMusic.pause();
+            questionMusic.pause();
+            timerStartSound.pause();
+            correctSound.pause();
+            wrongSound.pause();
+            fifty50Sound.pause();
+            phoneAFriendSound.pause();
+            audiencePollSound.pause();
+            winSound.pause();
+            
+            // Reset audio positions
+            bgMusic.currentTime = 0;
+            questionMusic.currentTime = 0;
+            timerStartSound.currentTime = 0;
+            correctSound.currentTime = 0;
+            wrongSound.currentTime = 0;
+            fifty50Sound.currentTime = 0;
+            phoneAFriendSound.currentTime = 0;
+            audiencePollSound.currentTime = 0;
+            winSound.currentTime = 0;
+        }
+
         // Toggle Background Music
         function toggleBgMusic() {
             bgMusicEnabled = !bgMusicEnabled;
@@ -1335,8 +1518,6 @@ function useAudiencePoll() {
 
         // Initialize the game and start background music
         window.onload = function() {
-            initializePrizeLadder();
-            
             // Start background music immediately when page loads
             if (bgMusicEnabled) {
                 bgMusic.volume = 0.3;
